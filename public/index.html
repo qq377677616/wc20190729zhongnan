@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <title>中南商业</title>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but zn_wechat doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+  <script src="https://cdn.bootcss.com/zepto/1.1.7/zepto.min.js"></script>
+  <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js "></script>
+  <script>
+    var baseUrl = "http://wgw.zoina.cn";
+    var href = window.location.href.replace(/#.*/, '');
+    //    获取签名
+    $.ajax({
+      url: baseUrl + '/zhongnan/public/index.php/data/jsapi/sign',
+      type: 'get',
+      data: {
+        url: href
+      },
+      success: function (resC) {
+        wx.config({
+          // debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+          appId: resC.data.appId, // 必填，公众号的唯一标识
+          timestamp: resC.data.timestamp, // 必填，生成签名的时间戳
+          nonceStr: resC.data.nonceStr, // 必填，生成签名的随机串
+          signature: resC.data.signature,// 必填，签名
+          jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表
+        });
+
+        wx.ready(function () {
+          // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+          var shareData = {
+            title: '中南商业微网站',
+            desc: '中南商业 用心 感动生活',
+            link: 'http://wgw.zoina.cn/wechat/index.html',
+            imgUrl: 'http://wgw.zoina.cn/wechat/zn_logo.png'
+          };
+          //获取“分享给朋友”按钮点击状态及自定义分享内容接口
+          wx.onMenuShareAppMessage(shareData);
+          //获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
+          wx.onMenuShareTimeline(shareData);
+          //获取“分享到QQ”按钮点击状态及自定义分享内容接口
+          // wx.onMenuShareQQ(shareData);
+        });
+      },
+      error: function (err) {
+        // console.log(err);
+      }
+    })
+  </script>
+</html>
