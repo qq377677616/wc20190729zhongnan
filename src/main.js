@@ -11,7 +11,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 import {post,fetch,patch,put} from 'common/http'
-//定义全局变量
+//这里定义全局变量
 Vue.prototype.$post=post;
 Vue.prototype.$fetch=fetch;
 Vue.prototype.$patch=patch;
