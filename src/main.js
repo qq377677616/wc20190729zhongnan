@@ -16,7 +16,7 @@ Vue.prototype.$post=post;
 Vue.prototype.$fetch=fetch;
 Vue.prototype.$patch=patch;
 Vue.prototype.$put=put;
-new Vue({
+new Vue({	
   router,
   render: h => h(App)
 }).$mount('#app')

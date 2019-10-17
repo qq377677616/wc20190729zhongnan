@@ -1,4 +1,4 @@
-const path = require('path');
+﻿const path = require('path');
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
@@ -16,7 +16,7 @@ module.exports = {
       .set('api',resolve('src/api'))
   },
   devServer: {
-    host: '192.168.1.220',
+    host: 'localhost',
     port: 8001,
     proxy: {
       '/api': {
